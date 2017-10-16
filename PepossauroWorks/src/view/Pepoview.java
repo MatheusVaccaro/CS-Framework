@@ -32,7 +32,7 @@ public class Pepoview extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("PePoSsAuRo EnTeRpRiSe");
+        this.primaryStage.setTitle("Pepossauro DB Interface");
         this.primaryStage.getIcons().add(new Image("logo.png"));
         this.primaryStage.setOnCloseRequest((event) -> { Platform.exit(); System.exit(0); });
         

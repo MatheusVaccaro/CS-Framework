@@ -6,18 +6,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TableViewController">
+<AnchorPane prefHeight="500.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TableViewController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="373.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="450.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0">
+            <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="360.0">
               <columns>
-                <TableColumn fx:id="labelColumn" prefWidth="150.0" sortable="false" text="Label" />
-                <TableColumn fx:id="dataColumn" prefWidth="150.0" sortable="false" text="Data" />
+                <TableColumn fx:id="labelColumn" prefWidth="180.0" sortable="false" text="Label" />
+                <TableColumn fx:id="dataColumn" prefWidth="180.0" sortable="false" text="Data" />
               </columns>
             </TableView>
-            <Button fx:id="deleteButton" layoutX="307.0" layoutY="153.0" mnemonicParsing="false" text="Delete" />
-            <Button fx:id="editButton" layoutX="314.0" layoutY="96.0" mnemonicParsing="false" text="Edit" />
+            <AnchorPane layoutY="450.0" prefHeight="50.0" prefWidth="360.0">
+               <children>
+                  <Button fx:id="deleteButton" layoutX="211.0" layoutY="12.0" mnemonicParsing="false" text="Delete" />
+                  <Button fx:id="editButton" layoutX="85.0" layoutY="12.0" mnemonicParsing="false" text="Update" />
+               </children>
+            </AnchorPane>
          </children>
       </Pane>
    </children>
