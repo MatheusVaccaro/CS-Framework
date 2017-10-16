@@ -114,7 +114,7 @@ public class Pepoview extends Application {
     
 	public void tableCellDidEdit(Identifiable edittedData) {
 		for(int i = 0; i < identifiableList.size(); i++){
-			if (identifiableList.get(i).getId() == edittedData.getId()) {
+			if (identifiableList.get(i).getId().equals(edittedData.getId())) {
 				identifiableList.remove(i);
 				identifiableList.add(i, edittedData);
 				break;
