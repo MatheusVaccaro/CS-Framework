@@ -152,7 +152,7 @@ public class TableViewController {
 		
 		ObservableList<Entry> entries = null;
 		if (currentData != null) {
-			entries = FXCollections.observableArrayList(convertMapToEntries(data.getDictionaryRepresentation()));
+			entries = FXCollections.observableArrayList(convertMapToEntries(data.getMapRepresentation()));
 		} else {
 			entries = FXCollections.observableArrayList(new Entry[0]);
 		}

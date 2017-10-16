@@ -14,7 +14,7 @@ public class MockIdentifiable extends Identifiable {
 		this.mockData = id.hashCode() % 100;
 	}
 	
-	public Map<String, String> getDictionaryRepresentation() {
+	public Map<String, String> getMapRepresentation() {
 		Map<String, String> dicRep = new HashMap<String, String>();
 		dicRep.put("id", id.toString());
 		dicRep.put("mockData", "" + mockData);

@@ -11,7 +11,7 @@ public abstract class Identifiable {
 		return id.toString();
 	}
 	
-	public abstract Map<String, String> getDictionaryRepresentation();
+	public abstract Map<String, String> getMapRepresentation();
 	
 	public void updateWithDic(Map<String, String> dictionary) throws Exception {
 		this.id = dictionary.get("id");
