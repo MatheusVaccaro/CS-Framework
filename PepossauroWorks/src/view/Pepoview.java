@@ -65,7 +65,6 @@ public class Pepoview extends Application {
         }
     }
     
-
     private void showLeftPane() {
     	 try {
              FXMLLoader loader = new FXMLLoader();
@@ -112,6 +111,17 @@ public class Pepoview extends Application {
     	identifiableList.remove(data);
 		db.delete(data);		    		
     }
+    
+	public void tableCellDidEdit(Identifiable edittedData) {
+		for(int i = 0; i < identifiableList.size(); i++){
+			if (identifiableList.get(i).getId() == edittedData.getId()) {
+				identifiableList.remove(i);
+				identifiableList.add(i, edittedData);
+				break;
+			}
+		}
+		db.update(edittedData);		
+	}
     
     public ObservableList<Identifiable> getIdentifiableList() {
     	return identifiableList;

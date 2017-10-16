@@ -13,10 +13,7 @@ public abstract class DatabaseManager<T extends Identifiable> {
 		return retrieve(data.getId()); 
 	}
 	
-	public abstract T update(T data, Object id);
-	public T update(T data) { 
-		return update(data, data.getId());
-	}
+	public abstract T update(T data);
 	
 	public abstract T delete(Object id);
 	public T delete(T data) {

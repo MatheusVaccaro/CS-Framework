@@ -70,7 +70,7 @@ public class Controller {
 	}
 
 	private void selectionChanged(ObservableValue<? extends Identifiable> observable, Identifiable oldValue, Identifiable newValue) {
-		app.getTableViewController().setData(newValue);
+		app.getTableViewController().setCurrentData(newValue);
 	}
 }
 

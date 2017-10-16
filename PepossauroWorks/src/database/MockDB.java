@@ -40,12 +40,11 @@ public class MockDB extends DatabaseManager<Identifiable> {
 	}
 
 	@Override
-	public Identifiable update(Identifiable data, Object id) {
-		MockIdentifiable mock = new MockIdentifiable((String)data.id);
-		items.remove(id);
-		items.add(mock);
+	public Identifiable update(Identifiable data) {
+		System.out.println(items.remove(data));
+		items.add(data);
 		
-		return mock;
+		return data;
 	}
 
 	@Override

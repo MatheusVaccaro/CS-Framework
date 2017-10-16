@@ -13,16 +13,32 @@ public class MockIdentifiable extends Identifiable {
 		this.id = id;
 		this.mockData = id.hashCode() % 100;
 	}
-
-	public Entry[] getComplexRepresentation() {
-//		Map<String, String> complexRep = new HashMap<String, String>();
-//		complexRep.put("id", id.toString());
-//		complexRep.put("data", "" + mockData);
+	
+	public Map<String, String> getDictionaryRepresentation() {
+		Map<String, String> dicRep = new HashMap<String, String>();
+		dicRep.put("id", id.toString());
+		dicRep.put("mockData", "" + mockData);
 		
-		Entry[] entries = new Entry[2];
-		entries[0] = new Entry("id", id.toString());
-		entries[1] = new Entry("data", "" + mockData);
-		
-		return entries;
+		return dicRep;
 	}
+	
+	@Override
+	public void updateWithDic(Map<String, String> dic) throws Exception {
+		Object oldId = id;
+		int oldMockData = mockData;
+		
+		try {
+			this.id = dic.get("id");
+			this.mockData = Integer.parseInt(dic.get("mockData"));			
+		} catch(Exception e) {
+			this.id = oldId;
+			this.mockData = oldMockData;
+			throw e;
+		}
+	}
+	
+	public String toString() {
+		return id + " " + mockData;
+	}
+
 }
