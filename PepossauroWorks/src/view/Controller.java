@@ -8,17 +8,17 @@ import javafx.scene.control.ListView;
 public class Controller {
 	
     @FXML
-    private ListView listView;
+    private ListView<String> listView;
     
-    public Controller() {
-//      
-      System.out.println(listView);
-      ListView<String> list = new ListView<String>();
-      ObservableList<String> items = FXCollections.observableArrayList (
-          "Single", "Double", "Suite", "Family App");
-      list.setItems(items);
-      listView.setItems( items );
-      listView.refresh();
-      System.out.println(listView);
+    public Controller() {}
+    
+    @FXML
+    private void initialize() {
+
+        ObservableList<String> items = FXCollections.observableArrayList (
+            "Single", "Double", "Suite", "Family App");
+        listView.setItems(items);
+        listView.refresh();
+        System.out.println(listView);
     }
 }
