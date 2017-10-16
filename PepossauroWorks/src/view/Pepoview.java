@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.Pepofile;
 
@@ -71,7 +72,7 @@ public class Pepoview extends Application {
              loader.setLocation(Pepoview.class.getResource("ListView.fxml"));
              listController = new Controller(this);
              loader.setControllerFactory(className -> listController);    
-             AnchorPane anchorPane = (AnchorPane) loader.load();
+             Pane anchorPane = (Pane) loader.load();
              ((AnchorPane) rootLayout.getItems().get(0)).getChildren().add(anchorPane);
          } catch (IOException e) {
              e.printStackTrace();

@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ListView.EditEvent;
@@ -26,10 +27,9 @@ public class Controller {
 	
 	@FXML
 	private ListView<Identifiable> listView;
-
 	@FXML
-	private ListView<String> rightListView;
-
+	private Button createEntry;
+	
 	 public Controller(Pepoview app) {
     	this.app = app;
     }
@@ -67,6 +67,8 @@ public class Controller {
 		});
 		
 		listView.getSelectionModel().selectFirst();
+		
+		createEntry.setOnAction(e -> EntryCreationBox.display());
 	}
 
 	private void selectionChanged(ObservableValue<? extends Identifiable> observable, Identifiable oldValue, Identifiable newValue) {

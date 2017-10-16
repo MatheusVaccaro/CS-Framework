@@ -131,6 +131,7 @@ public class TableViewController {
 		    		try {
 		    			currentData.updateWithDic(edittedDataMap);		    			
 		    			app.tableCellDidEdit(currentData);
+		    			
 		    		} catch (Exception exception) {
 //		    			exception.printStackTrace();
 		    			final Stage dialog = new Stage();
