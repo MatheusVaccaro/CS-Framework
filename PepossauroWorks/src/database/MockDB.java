@@ -26,6 +26,13 @@ public class MockDB extends DatabaseManager<Identifiable> {
 
 	@Override
 	public Identifiable create(Identifiable data) {
+		for(Identifiable identifiable: items) {
+			if (identifiable.id.equals(data.id)) {
+				return null;
+			}
+		}
+		items.add(data);
+		
 		return data;
 	}
 

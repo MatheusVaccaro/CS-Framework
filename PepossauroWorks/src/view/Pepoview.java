@@ -123,6 +123,13 @@ public class Pepoview extends Application {
 		}
 		db.update(edittedData);		
 	}
+
+	public void dialogDidCreate(Identifiable identifiable) {
+		Identifiable created = db.create(identifiable);
+		if(created != null) {
+			identifiableList.add(created);
+		}
+	}
     
     public ObservableList<Identifiable> getIdentifiableList() {
     	return identifiableList;
@@ -131,5 +138,6 @@ public class Pepoview extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
     
 }

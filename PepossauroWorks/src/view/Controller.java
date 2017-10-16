@@ -20,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ListView.EditEvent;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.Callback;
+import main.Pepofile;
 
 public class Controller {
 
@@ -68,7 +69,7 @@ public class Controller {
 		
 		listView.getSelectionModel().selectFirst();
 		
-		createEntry.setOnAction(e -> EntryCreationBox.display());
+		createEntry.setOnAction(e -> EntryCreationBox.display(Pepofile.identifiable.copy(), app));
 	}
 
 	private void selectionChanged(ObservableValue<? extends Identifiable> observable, Identifiable oldValue, Identifiable newValue) {

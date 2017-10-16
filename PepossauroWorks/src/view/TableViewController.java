@@ -182,7 +182,7 @@ public class TableViewController {
 		return map;
 	}
 	
-	public class Entry {
+	public static class Entry {
         private String label;
         private String data;
 

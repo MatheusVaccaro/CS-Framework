@@ -37,6 +37,12 @@ public class MockIdentifiable extends Identifiable {
 		}
 	}
 	
+	public Identifiable copy() {
+		MockIdentifiable copy = new MockIdentifiable((String)this.getId());
+		copy.mockData = this.mockData;
+		return copy;
+	}
+	
 	public String toString() {
 		return id + " " + mockData;
 	}

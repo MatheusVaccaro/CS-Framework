@@ -13,6 +13,8 @@ public abstract class Identifiable {
 	
 	public abstract Map<String, String> getMapRepresentation();
 	
+	public abstract Identifiable copy();
+	
 	public void updateWithDic(Map<String, String> dictionary) throws Exception {
 		this.id = dictionary.get("id");
 	}
