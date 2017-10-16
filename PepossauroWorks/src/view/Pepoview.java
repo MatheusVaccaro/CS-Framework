@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import database.DatabaseManager;
 import database.Identifiable;
-import database.MockDB;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -17,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.Pepofile;
+import mock.MockDB;
 
 public class Pepoview extends Application {
 

@@ -1,4 +1,4 @@
-package view;
+package mock;
 
 import java.util.HashMap;
 import java.util.Map;

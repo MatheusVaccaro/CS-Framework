@@ -1,4 +1,4 @@
-package database;
+package mock;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -6,7 +6,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-import view.MockIdentifiable;
+import database.DatabaseManager;
+import database.Identifiable;
 
 public class MockDB extends DatabaseManager<Identifiable> {
 	
@@ -27,7 +28,7 @@ public class MockDB extends DatabaseManager<Identifiable> {
 	@Override
 	public Identifiable create(Identifiable data) {
 		for(Identifiable identifiable: items) {
-			if (identifiable.id.equals(data.id)) {
+			if (identifiable.getId().equals(data.getId())) {
 				return null;
 			}
 		}
@@ -39,7 +40,7 @@ public class MockDB extends DatabaseManager<Identifiable> {
 	@Override
 	public Identifiable retrieve(Object id) {
 		for(Identifiable obj: items) {
-			if (obj.id.equals(id)) {
+			if (obj.getId().equals(id)) {
 				return obj;
 			}
 		}
@@ -58,7 +59,7 @@ public class MockDB extends DatabaseManager<Identifiable> {
 	public Identifiable delete(Object id) {
 		Identifiable objToRemove = null;
 		for(Identifiable obj: items) {
-			if (obj.id.equals(id)) {
+			if (obj.getId().equals(id)) {
 				objToRemove = obj;
 				break;
 			}

@@ -10,7 +10,6 @@ import java.util.Objects;
 
 import database.DatabaseManager;
 import database.Identifiable;
-import database.MockDB;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +34,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import mock.MockDB;
 import javafx.util.Callback;
 
 public class TableViewController {
@@ -67,8 +67,6 @@ public class TableViewController {
 		    return new TableCell<Entry, String>() {
 		        @Override
 		        protected void updateItem(String item, boolean empty) {
-		            super.updateItem(item, empty);
-
 		            super.updateItem(item, empty);
                     if (item != null) {
                         setText(item);

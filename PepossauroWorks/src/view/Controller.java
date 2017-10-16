@@ -9,7 +9,6 @@ import java.util.function.Consumer;
 
 import database.DatabaseManager;
 import database.Identifiable;
-import database.MockDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -21,6 +20,7 @@ import javafx.scene.control.ListView.EditEvent;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.Callback;
 import main.Pepofile;
+import mock.MockDB;
 
 public class Controller {
 
