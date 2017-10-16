@@ -63,7 +63,6 @@ public class Controller {
         });
 		listView.setItems(items);
 		listView.refresh();
-		System.out.println(listView);
 
 		listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Identifiable>() {
 			@Override
@@ -77,7 +76,7 @@ public class Controller {
 	}
 
 	private void selectionChanged(ObservableValue<? extends Identifiable> observable, Identifiable oldValue, Identifiable newValue) {
-		// retrieve the selected row data and add it to rightListView
+		app.getTableViewController().setData(newValue);
 	}
 }
 

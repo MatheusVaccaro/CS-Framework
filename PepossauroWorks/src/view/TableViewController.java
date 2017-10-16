@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import database.Identifiable;
+import database.Identifiable.Entry;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
@@ -18,12 +20,15 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
 public class TableViewController {
+	
+	private Identifiable currentData;
+	
 	@FXML
-	private TableView tableView;
+	private TableView<Entry> tableView;
 	@FXML
-	private TableColumn<Identifiable, Identifiable> labelColumn;
+	private TableColumn<Identifiable, String> labelColumn;
 	@FXML
-	private TableColumn<Identifiable, Identifiable> dataColumn;
+	private TableColumn<Identifiable, String> dataColumn;
 	@FXML
 	private Button editButton;
 	@FXML
@@ -35,14 +40,14 @@ public class TableViewController {
 	private void initialize() {
 		
 		labelColumn.setCellFactory(column -> {
-		    return new TableCell<Identifiable, Identifiable>() {
+		    return new TableCell<Identifiable, String>() {
 		        @Override
-		        protected void updateItem(Identifiable item, boolean empty) {
+		        protected void updateItem(String item, boolean empty) {
 		            super.updateItem(item, empty);
 
 		            super.updateItem(item, empty);
                     if (item != null) {
-                        item.getComplexRepresentation();
+                        setText(item);
                     } else {
                         setText("");
                     }
@@ -54,42 +59,22 @@ public class TableViewController {
 		labelColumn.setCellValueFactory(new PropertyValueFactory<>("label"));
 		dataColumn.setCellValueFactory(new PropertyValueFactory<>("data"));
 		dataColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-		tableView.setItems(FXCollections.observableArrayList(pessoas));
+//		tableView.setItems(FXCollections.observableArrayList(pessoas));
 		tableView.setEditable(true);
 		dataColumn.setEditable(true);
 	
 	}
 
-	public void setData(Map<String, String> dic) {
-		tableView.setItems(value);
+	public void setData(Identifiable data) {
+		currentData = data;
+		
+		ObservableList<Entry> entries = null;
+		if (currentData != null) {
+			entries = FXCollections.observableArrayList(data.getComplexRepresentation());
+		} else {
+			entries = FXCollections.observableArrayList(new Entry[0]);
+		}
+		
+		tableView.setItems(entries);
 	}
-	
-	public static class Entry {
-
-        private String label;
-        private String data;
-
-        public Entry(String label, String data) {
-            this.label = label;
-            this.data = data;
-        }
-
-		public String getLabel() {
-			return label;
-		}
-
-		public void setLabel(String label) {
-			this.label = label;
-		}
-
-		public String getData() {
-			return data;
-		}
-
-		public void setData(String data) {
-			this.data = data;
-		}
-
-
-    }
 }

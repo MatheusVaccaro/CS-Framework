@@ -14,11 +14,15 @@ public class MockIdentifiable extends Identifiable {
 		this.mockData = id.hashCode() % 100;
 	}
 
-	public Map<String, String> getComplexRepresentation() {
-		Map<String, String> complexRep = new HashMap<String, String>();
-		complexRep.put("id", id.toString());
-		complexRep.put("data", "" + mockData);
+	public Entry[] getComplexRepresentation() {
+//		Map<String, String> complexRep = new HashMap<String, String>();
+//		complexRep.put("id", id.toString());
+//		complexRep.put("data", "" + mockData);
 		
-		return complexRep;
+		Entry[] entries = new Entry[2];
+		entries[0] = new Entry("id", id.toString());
+		entries[1] = new Entry("data", "" + mockData);
+		
+		return entries;
 	}
 }

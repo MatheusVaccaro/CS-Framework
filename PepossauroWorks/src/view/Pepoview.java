@@ -40,23 +40,19 @@ public class Pepoview extends Application {
         
         initRootLayout();
         showRightPane();
+        showLeftPane();
     }
 
-    /**
+
+	/**
      * Initializes the root layout.
      */
     public void initRootLayout() {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            System.out.println("awe");
             loader.setLocation(Pepoview.class.getResource("MainWindow.fxml"));
-            loader.setControllerFactory(className -> new Controller(this));            
-            System.out.println("owa");
-            rootLayout = (SplitPane) loader.load();
-
-            System.out.println("fk u sysout");
-            
+            rootLayout = (SplitPane) loader.load();            
             
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -66,17 +62,28 @@ public class Pepoview extends Application {
             e.printStackTrace();
         }
     }
+    
+
+    private void showLeftPane() {
+    	 try {
+             FXMLLoader loader = new FXMLLoader();
+             loader.setLocation(Pepoview.class.getResource("ListView.fxml"));
+             loader.setControllerFactory(className -> new Controller(this));    
+             AnchorPane anchorPane = (AnchorPane) loader.load();
+             ((AnchorPane) rootLayout.getItems().get(0)).getChildren().add(anchorPane);
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+	}
 
     public void showRightPane() {
     	 try {
-             // Load root layout from fxml file.
              FXMLLoader loader = new FXMLLoader();
              loader.setLocation(Pepoview.class.getResource("TableView.fxml"));
-             loader.setControllerFactory(className -> new TableViewController());    
-             System.out.println("--1--");
-             Object anchorPane = loader.load();
-             System.out.println("--2--");
-             ((AnchorPane) rootLayout.getItems().get(1)).getChildren().add((AnchorPane) anchorPane);
+             this.tableViewController = new TableViewController();
+             loader.setControllerFactory(className -> this.tableViewController);    
+             AnchorPane anchorPane = (AnchorPane) loader.load();
+             ((AnchorPane) rootLayout.getItems().get(1)).getChildren().add(anchorPane);
          } catch (IOException e) {
              e.printStackTrace();
          }
@@ -110,6 +117,10 @@ public class Pepoview extends Application {
     
     public DatabaseManager<Identifiable> getDB() {
     	return this.db;
+    }
+    
+    public TableViewController getTableViewController() {
+    	return this.tableViewController;
     }
     
     public static void main(String[] args) {
