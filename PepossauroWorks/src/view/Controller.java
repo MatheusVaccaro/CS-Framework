@@ -14,9 +14,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ListView.EditEvent;
 import javafx.scene.control.cell.TextFieldListCell;
+import javafx.util.Callback;
 
 public class Controller {
 
@@ -24,7 +26,7 @@ public class Controller {
 	private DatabaseManager<Identifiable> db;
 	
 	@FXML
-	private ListView<String> listView;
+	private ListView<Identifiable> listView;
 
 	@FXML
 	private ListView<String> rightListView;
@@ -39,20 +41,34 @@ public class Controller {
 
 	@FXML
 	private void initialize() {
-
-		ArrayList<String> simpleItems = new ArrayList<String>();
-    	for(Object obj: db.retrieveAll().stream().map(i -> i.getSimpleRepresentation()).toArray()) {
-    		simpleItems.add((String)obj);
-    	}
-
-        ObservableList<String> items = FXCollections.observableArrayList(simpleItems);
+		
+		ObservableList<Identifiable> items = FXCollections.observableArrayList(db.retrieveAll());
+        
+		listView.setCellFactory(new Callback<ListView<Identifiable>, ListCell<Identifiable>>() {
+			@Override
+			public ListCell<Identifiable> call(ListView<Identifiable> param) {
+				ListCell<Identifiable> cell = new ListCell<Identifiable>() {
+                    @Override
+                    protected void updateItem(Identifiable item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item.getSimpleRepresentation());
+                        } else {
+                            setText("");
+                        }
+                    }
+                };
+                return cell;
+			}
+        });
 		listView.setItems(items);
 		listView.refresh();
 		System.out.println(listView);
 
-		listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-			public void changed(ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
-				selectionChanged(ov, oldValue, newValue);
+		listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Identifiable>() {
+			@Override
+			public void changed(ObservableValue<? extends Identifiable> ov, Identifiable oldValue, Identifiable newValue) {
+				selectionChanged(ov, oldValue, newValue);				
 			}
 		});
 		
@@ -60,7 +76,7 @@ public class Controller {
 
 	}
 
-	private void selectionChanged(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+	private void selectionChanged(ObservableValue<? extends Identifiable> observable, Identifiable oldValue, Identifiable newValue) {
 		// retrieve the selected row data and add it to rightListView
 	}
 }
