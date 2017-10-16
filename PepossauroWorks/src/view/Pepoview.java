@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.Pepofile;
 
@@ -71,9 +72,11 @@ public class Pepoview extends Application {
              // Load root layout from fxml file.
              FXMLLoader loader = new FXMLLoader();
              loader.setLocation(Pepoview.class.getResource("TableView.fxml"));
-             loader.setControllerFactory(className -> new TableViewController());            
-             TableView tableView = (TableView) loader.load();
-             ((AnchorPane) rootLayout.getItems().get(1)).getChildren().add(tableView);
+             loader.setControllerFactory(className -> new TableViewController());    
+             System.out.println("--1--");
+             Object anchorPane = loader.load();
+             System.out.println("--2--");
+             ((AnchorPane) rootLayout.getItems().get(1)).getChildren().add((AnchorPane) anchorPane);
          } catch (IOException e) {
              e.printStackTrace();
          }
