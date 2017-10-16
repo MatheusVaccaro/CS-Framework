@@ -4,20 +4,16 @@ import java.io.IOException;
 
 import database.DatabaseManager;
 import database.Identifiable;
+import database.MockDB;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.Pepofile;
 
@@ -26,10 +22,11 @@ public class Pepoview extends Application {
     private Stage primaryStage;
     private SplitPane rootLayout;
     
-    private Controller controller;
+    private Controller listController;
     private TableViewController tableViewController;
     
-    private DatabaseManager db = Pepofile.db;
+	private DatabaseManager<Identifiable> db = Pepofile.db != null ? Pepofile.db : new MockDB();
+    private ObservableList<Identifiable> identifiableList;
 
     @Override
     public void start(Stage primaryStage) {
@@ -38,11 +35,16 @@ public class Pepoview extends Application {
         this.primaryStage.getIcons().add(new Image("logo.png"));
         this.primaryStage.setOnCloseRequest((event) -> { Platform.exit(); System.exit(0); });
         
+        fetchData();
+        
         initRootLayout();
         showRightPane();
         showLeftPane();
     }
 
+	private void fetchData() {
+		identifiableList = FXCollections.observableArrayList(db.retrieveAll());
+	}
 
 	/**
      * Initializes the root layout.
@@ -68,7 +70,8 @@ public class Pepoview extends Application {
     	 try {
              FXMLLoader loader = new FXMLLoader();
              loader.setLocation(Pepoview.class.getResource("ListView.fxml"));
-             loader.setControllerFactory(className -> new Controller(this));    
+             listController = new Controller(this);
+             loader.setControllerFactory(className -> listController);    
              AnchorPane anchorPane = (AnchorPane) loader.load();
              ((AnchorPane) rootLayout.getItems().get(0)).getChildren().add(anchorPane);
          } catch (IOException e) {
@@ -80,31 +83,13 @@ public class Pepoview extends Application {
     	 try {
              FXMLLoader loader = new FXMLLoader();
              loader.setLocation(Pepoview.class.getResource("TableView.fxml"));
-             this.tableViewController = new TableViewController();
+             this.tableViewController = new TableViewController(this);
              loader.setControllerFactory(className -> this.tableViewController);    
              AnchorPane anchorPane = (AnchorPane) loader.load();
              ((AnchorPane) rootLayout.getItems().get(1)).getChildren().add(anchorPane);
          } catch (IOException e) {
              e.printStackTrace();
          }
-    }
-    
-    /**
-     * Shows the person overview inside the root layout.
-     */
-    public void showMainWindow() {
-        try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Pepoview.class.getResource("MainWindow.fxml"));            
-//            loader.setControllerFactory(className -> new StreamController(collector));            
-            AnchorPane mainWindow = (AnchorPane) loader.load();
-
-            // Set person overview into the center of root layout.
-//            rootLayout.setCenter(mainWindow);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -115,12 +100,21 @@ public class Pepoview extends Application {
         return primaryStage;
     }
     
-    public DatabaseManager<Identifiable> getDB() {
+	public DatabaseManager<Identifiable> getDB() {
     	return this.db;
     }
     
     public TableViewController getTableViewController() {
     	return this.tableViewController;
+    }
+    
+    public void tableCellDidDelete(Identifiable data) {
+    	identifiableList.remove(data);
+		db.delete(data);		    		
+    }
+    
+    public ObservableList<Identifiable> getIdentifiableList() {
+    	return identifiableList;
     }
     
     public static void main(String[] args) {

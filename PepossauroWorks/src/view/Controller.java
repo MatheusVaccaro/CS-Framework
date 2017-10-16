@@ -23,7 +23,6 @@ import javafx.util.Callback;
 public class Controller {
 
 	private Pepoview app;
-	private DatabaseManager<Identifiable> db;
 	
 	@FXML
 	private ListView<Identifiable> listView;
@@ -33,16 +32,12 @@ public class Controller {
 
 	 public Controller(Pepoview app) {
     	this.app = app;
-    	this.db = app.getDB();
-    	if (db == null) {
-    		db = new MockDB();
-    	}
     }
 
 	@FXML
 	private void initialize() {
 		
-		ObservableList<Identifiable> items = FXCollections.observableArrayList(db.retrieveAll());
+		ObservableList<Identifiable> items = app.getIdentifiableList();
         
 		listView.setCellFactory(new Callback<ListView<Identifiable>, ListCell<Identifiable>>() {
 			@Override
@@ -72,7 +67,6 @@ public class Controller {
 		});
 		
 		listView.getSelectionModel().selectFirst();
-
 	}
 
 	private void selectionChanged(ObservableValue<? extends Identifiable> observable, Identifiable oldValue, Identifiable newValue) {

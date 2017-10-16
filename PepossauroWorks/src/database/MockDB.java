@@ -2,7 +2,9 @@ package database;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import view.MockIdentifiable;
 
@@ -11,7 +13,7 @@ public class MockDB extends DatabaseManager<Identifiable> {
 	private Set<Identifiable> items;
 	
 	public MockDB() {
-		items = new HashSet<Identifiable>();
+		items = new LinkedHashSet<Identifiable>();
 		items.add(new MockIdentifiable("Mock1"));
 		items.add(new MockIdentifiable("Mock2"));
 		items.add(new MockIdentifiable("Mock3"));
@@ -55,7 +57,7 @@ public class MockDB extends DatabaseManager<Identifiable> {
 				break;
 			}
 		}
-		
+		System.out.println("deleting " + objToRemove);
 		items.remove(objToRemove);
 		return objToRemove;
 	}
