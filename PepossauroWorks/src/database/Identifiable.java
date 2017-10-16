@@ -1,7 +1,11 @@
 package database;
 
 public abstract class Identifiable {
-	private Object id;
+	protected Object id;
 	
 	public Object getId() {	return id; }
+	
+	public String getSimpleRepresentation() {
+		return id.toString();
+	}
 }
