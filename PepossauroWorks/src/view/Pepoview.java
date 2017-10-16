@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import database.DatabaseManager;
 import database.Identifiable;
-import database.Pepofile;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -18,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import main.Pepofile;
 
 public class Pepoview extends Application {
 
@@ -47,7 +47,7 @@ public class Pepoview extends Application {
             FXMLLoader loader = new FXMLLoader();
             System.out.println("awe");
             loader.setLocation(Pepoview.class.getResource("MainWindow.fxml"));
-            loader.setControllerFactory(className -> new Controller());            
+            loader.setControllerFactory(className -> new Controller(this));            
             System.out.println("owa");
             rootLayout = (SplitPane) loader.load();
 
@@ -87,6 +87,10 @@ public class Pepoview extends Application {
      */
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+    
+    public DatabaseManager<Identifiable> getDB() {
+    	return this.db;
     }
     
     public static void main(String[] args) {
