@@ -1,6 +1,5 @@
 package main;
 
-import database.Pepofile;
 import view.Pepoview;
 
 public class Application {
