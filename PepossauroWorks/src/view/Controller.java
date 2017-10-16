@@ -15,9 +15,6 @@ public class Controller {
 	@FXML
 	private ListView<String> listView;
 
-	@FXML
-	private ListView<String> rightListView;
-
 	public Controller() {
 	}
 

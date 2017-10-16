@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -25,6 +26,7 @@ public class Pepoview extends Application {
     private SplitPane rootLayout;
     
     private Controller controller;
+    private TableViewController tableViewController;
     
     private DatabaseManager db = Pepofile.db;
 
@@ -36,6 +38,7 @@ public class Pepoview extends Application {
         this.primaryStage.setOnCloseRequest((event) -> { Platform.exit(); System.exit(0); });
         
         initRootLayout();
+        showRightPane();
     }
 
     /**
@@ -63,6 +66,19 @@ public class Pepoview extends Application {
         }
     }
 
+    public void showRightPane() {
+    	 try {
+             // Load root layout from fxml file.
+             FXMLLoader loader = new FXMLLoader();
+             loader.setLocation(Pepoview.class.getResource("TableView.fxml"));
+             loader.setControllerFactory(className -> new TableViewController());            
+             TableView tableView = (TableView) loader.load();
+             ((AnchorPane) rootLayout.getItems().get(1)).getChildren().add(tableView);
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+    }
+    
     /**
      * Shows the person overview inside the root layout.
      */
